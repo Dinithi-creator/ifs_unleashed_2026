@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Copperleaf at Unleashed 2026 — AE Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+:root{--midnight:#170430;--dark-purple:#360065;--lilac:#CD92FF;--purple:#8427E2;--blue:#72C9F8;--green:#33FF94;--fuchsia:#E00072;--white:#FFFFFF;--grey4:#E1EBEB;--grey3:#C8D2D7;--grey2:#919BA5;--dark-grey:#232323;--font:'DM Sans',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font);background:var(--white);color:var(--midnight);font-size:15px;line-height:1.6;letter-spacing:-.005em;-webkit-font-smoothing:antialiased}a{color:inherit}
+#authGate{position:fixed;inset:0;z-index:9999;background:var(--midnight);display:flex;align-items:center;justify-content:center}
+.gate-box{background:#1e0a3c;border:1px solid rgba(205,146,255,.3);border-radius:16px;padding:40px;max-width:400px;width:90%;text-align:center;position:relative}
+.gate-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(132,39,226,.25) 0%,transparent 65%);pointer-events:none;border-radius:16px}
+.gate-logo{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--lilac);margin-bottom:20px}
+.gate-title{font-size:20px;font-weight:600;color:var(--white);margin-bottom:8px;letter-spacing:-.02em}
+.gate-sub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:24px;line-height:1.5}
+.gate-input{width:100%;padding:11px 14px;border-radius:8px;border:1px solid rgba(205,146,255,.3);background:rgba(255,255,255,.06);color:var(--white);font-size:14px;font-family:var(--font);outline:none;margin-bottom:12px;transition:border-color .15s;text-align:center}
+.gate-input:focus{border-color:var(--purple)}.gate-input::placeholder{color:rgba(255,255,255,.3)}
+.gate-btn{width:100%;padding:12px;border-radius:100px;background:var(--purple);color:var(--white);border:none;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);transition:opacity .15s}
+.gate-btn:hover{opacity:.88}
+.gate-error{font-size:12px;color:var(--fuchsia);margin-top:10px;min-height:18px}
+.hero{background:var(--midnight);padding:40px 32px 32px;position:relative;overflow:hidden}.hero:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(132,39,226,.3) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(114,201,248,.12) 0%,transparent 55%),radial-gradient(ellipse at 60% 80%,rgba(205,146,255,.1) 0%,transparent 50%);pointer-events:none}.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto}.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}.hero-left{flex:1;min-width:280px}.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--lilac);margin-bottom:12px}.hero-title{font-size:clamp(28px,4vw,42px);font-weight:600;letter-spacing:-.02em;line-height:1.1;background:linear-gradient(90deg,var(--purple) 0%,var(--purple) 50%,var(--lilac) 75%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}.hero-sub{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:20px}.hero-date{color:var(--white);font-size:16px;font-weight:500}.week-indicator{display:inline-flex;align-items:center;gap:8px;background:rgba(132,39,226,.25);border:1px solid rgba(205,146,255,.3);border-radius:100px;padding:6px 14px;margin-top:12px;font-size:12px;font-weight:500;color:var(--lilac)}.week-dot{width:6px;height:6px;border-radius:50%;background:var(--lilac);flex-shrink:0}.this-week-card{background:var(--white);border-radius:12px;padding:20px 22px;margin-top:24px;max-width:600px}.this-week-card h3{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:10px}.this-week-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px}.this-week-label{font-size:11px;font-weight:600;color:var(--grey2);min-width:72px;padding-top:1px;text-transform:uppercase;letter-spacing:.03em}.this-week-val{font-size:14px;color:var(--midnight)}.hero-right{display:flex;flex-direction:column;align-items:center;gap:16px}.circle-cluster{display:flex;align-items:center}.circle-ring{width:64px;height:64px;border-radius:50%;border:2px solid rgba(205,146,255,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0}.circle-ring.sm{width:48px;height:48px;margin:0 -8px;z-index:0}.circle-main{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;flex-shrink:0;box-shadow:0 0 24px rgba(132,39,226,.5)}.days-num{font-size:26px;font-weight:600;color:var(--white);line-height:1}.days-label{font-size:9px;font-weight:500;color:rgba(255,255,255,.8);letter-spacing:.04em;text-transform:uppercase}.countdown-label{font-size:12px;color:rgba(255,255,255,.5);text-align:center}.quota-mini{display:flex;flex-direction:column;align-items:center;gap:6px}.quota-mini-label{font-size:11px;color:rgba(255,255,255,.6);text-align:center}.quota-mini-val{font-size:13px;font-weight:600;color:var(--white)}
+.sticky-nav{position:sticky;top:0;z-index:100;background:var(--midnight);border-bottom:1px solid rgba(255,255,255,.08);padding:0 32px}.sticky-nav-inner{max-width:1100px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}.sticky-nav-inner::-webkit-scrollbar{display:none}.nav-btn{background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:var(--font);font-size:13px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s}.nav-btn:hover{color:var(--lilac)}.nav-btn.active{color:var(--white);border-bottom-color:var(--purple)}
+.main{max-width:1100px;margin:0 auto;padding:0 32px 80px}.section{padding:40px 0}.section+.section{border-top:1px solid var(--grey4)}.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:16px}.section-title{font-size:20px;font-weight:600;color:var(--midnight);letter-spacing:-.02em}.section-title em{font-style:normal;color:var(--purple)}.collapse-btn{background:none;border:1px solid var(--grey3);border-radius:6px;padding:5px 12px;font-family:var(--font);font-size:12px;font-weight:500;color:var(--grey2);cursor:pointer;transition:all .15s}.collapse-btn:hover{border-color:var(--purple);color:var(--purple)}.collapsible{overflow:hidden;transition:max-height .3s ease}.collapsible.closed{max-height:0!important}
+.week-timeline{display:flex;flex-direction:column;gap:12px}.week-card{border:1px solid var(--grey4);border-radius:12px;padding:22px 24px;background:var(--white);transition:box-shadow .15s;position:relative}.week-card:hover{box-shadow:0 4px 20px rgba(132,39,226,.08)}.week-card.sales-window{border-left:3px solid var(--purple)}.week-card.event-week{background:var(--midnight);color:var(--white);border-color:var(--midnight)}.week-card.event-week .wc-meta{color:rgba(255,255,255,.5)}.week-card.event-week .wc-title{color:var(--white)}.week-card.event-week .wc-section-label{color:var(--lilac)}.week-card.event-week .wc-body{color:rgba(255,255,255,.8)}.week-card.event-week .wc-tag{background:rgba(132,39,226,.3);color:var(--lilac)}.week-card.past{opacity:.5}.wc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}.wc-left{flex:1}.wc-meta{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--grey2);margin-bottom:4px}.wc-title{font-size:16px;font-weight:600;color:var(--midnight);letter-spacing:-.01em}.wc-badges{display:flex;gap:6px;flex-wrap:wrap}.wc-tag{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:3px 10px;border-radius:100px;background:var(--grey4);color:var(--grey2)}.wc-tag.sales{background:rgba(132,39,226,.12);color:var(--purple)}.wc-tag.event{background:var(--purple);color:var(--white)}.wc-tag.current{background:var(--green);color:var(--midnight)}.wc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}.wc-section-label{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}.wc-body{font-size:13px;color:var(--dark-grey);line-height:1.55}.wc-body ul{padding-left:16px}.wc-body li{margin-bottom:3px}.wc-talk-track{background:rgba(132,39,226,.05);border:1px solid rgba(132,39,226,.12);border-radius:8px;padding:12px 14px;margin-top:12px}.wc-talk-track .wc-body{font-size:13px;font-style:italic;color:var(--dark-grey)}.week-card.event-week .wc-talk-track{background:rgba(205,146,255,.08);border-color:rgba(205,146,255,.2)}
+.offer-table,.quota-table{width:100%;border-collapse:collapse;font-size:14px;border-radius:10px;overflow:hidden}.offer-table th,.quota-table th{background:var(--midnight);color:var(--white);padding:12px 16px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}.offer-table td,.quota-table td{padding:12px 16px;border-bottom:1px solid var(--grey4);color:var(--midnight);vertical-align:top}.offer-table tr:last-child td,.quota-table tr:last-child td{border-bottom:none}.stat-callout{background:linear-gradient(135deg,rgba(132,39,226,.08),rgba(114,201,248,.06));border:1px solid rgba(132,39,226,.2);border-radius:10px;padding:20px 24px;display:inline-flex;flex-direction:column;gap:4px;margin:20px 0}.stat-num{font-size:36px;font-weight:600;color:var(--purple);letter-spacing:-.02em;line-height:1}.stat-sub{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple)}.stat-note{font-size:12px;color:var(--grey2);margin-top:2px}.pill-btn{display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:var(--white);border:none;border-radius:100px;padding:10px 22px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .15s}.pill-btn:hover{opacity:.88}.pill-btn.ghost{background:transparent;border:1.5px solid var(--purple);color:var(--purple)}.pill-btn.ghost:hover{background:rgba(132,39,226,.06)}
+.asset-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}.asset-col-head{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid}.asset-col-head.ready{color:var(--purple);border-color:var(--purple)}.asset-col-head.coming{color:var(--lilac);border-color:var(--lilac)}.asset-col-head.hold{color:var(--grey2);border-color:var(--grey2)}.asset-item{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--grey4)}.asset-item:last-child{border-bottom:none}.asset-name{font-size:13px;color:var(--midnight)}.asset-action{font-size:11px;font-weight:600;color:var(--purple);cursor:pointer;white-space:nowrap;background:none;border:none;font-family:var(--font);padding:0;text-decoration:none}.asset-action:hover{text-decoration:underline}.asset-status{font-size:11px;color:var(--grey2);padding-top:2px}
+.tracker-box{background:var(--grey4);border-radius:12px;padding:24px;margin-top:24px}.tracker-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:flex-end}.tracker-field{display:flex;flex-direction:column;gap:5px}.tracker-field label{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--grey2)}.tracker-field select,.tracker-field input{font-family:var(--font);font-size:14px;font-weight:500;color:var(--midnight);background:var(--white);border:1px solid var(--grey3);border-radius:7px;padding:8px 12px;outline:none;transition:border-color .15s;min-width:100px}.tracker-field select:focus,.tracker-field input:focus{border-color:var(--purple)}.progress-bar-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;font-weight:500}.progress-bar-track{height:12px;background:var(--grey3);border-radius:100px;overflow:hidden}.progress-bar-fill{height:100%;border-radius:100px;transition:width .4s ease;background:linear-gradient(90deg,var(--purple),var(--blue))}.progress-bar-fill.warn{background:var(--lilac)}.progress-bar-fill.behind{background:var(--fuchsia)}.pacing-note{font-size:13px;color:var(--grey2);margin-top:10px}.pacing-note strong{color:var(--midnight)}
+.talk-track-list{display:flex;flex-direction:column;gap:12px}.tt-card{border:1px solid var(--grey4);border-radius:10px;padding:18px 20px}.tt-label{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:8px}.tt-subject{font-size:13px;font-weight:500;color:var(--midnight);margin-bottom:8px}.tt-body{font-size:13px;color:var(--dark-grey);line-height:1.6;font-style:italic}.tt-card.special{border-color:rgba(132,39,226,.3);background:rgba(132,39,226,.03)}
+.faq-list{display:flex;flex-direction:column;gap:10px}.faq-item{border:1px solid var(--grey4);border-radius:10px;overflow:hidden}.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-size:14px;font-weight:500;color:var(--midnight);background:var(--white);border:none;width:100%;text-align:left;font-family:var(--font);transition:background .15s}.faq-q:hover{background:rgba(132,39,226,.03)}.faq-arrow{color:var(--purple);font-size:16px;transition:transform .2s;flex-shrink:0}.faq-q.open .faq-arrow{transform:rotate(180deg)}.faq-a{padding:0 20px 16px;font-size:14px;color:var(--dark-grey);line-height:1.6;display:none}.faq-a.open{display:block}.faq-a ul{padding-left:18px}.assumption{font-size:11px;color:var(--fuchsia);font-weight:600}
+.closing{background:var(--midnight);border-radius:16px;padding:40px;text-align:center;margin-top:40px;position:relative;overflow:hidden}.closing:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(132,39,226,.4) 0%,transparent 60%);pointer-events:none}.closing h2{font-size:24px;font-weight:600;color:var(--white);position:relative;letter-spacing:-.02em;margin-bottom:8px}.closing p{font-size:14px;color:rgba(255,255,255,.6);position:relative;margin-bottom:20px}.closing .pill-btn{position:relative}
+@media(max-width:700px){.wc-grid,.asset-cols{grid-template-columns:1fr}}
+@media(max-width:600px){.hero{padding:28px 20px 24px}.main{padding:0 20px 60px}.sticky-nav{padding:0 20px}.hero-top{flex-direction:column}.hero-right{flex-direction:row;align-items:flex-start}.section-header{align-items:flex-start}.offer-table,.quota-table{font-size:12px}}
+@media print{#authGate{display:none!important}.hero,.closing{background:white;color:var(--midnight)}.hero-title{-webkit-text-fill-color:var(--midnight)}.sticky-nav{display:none}.week-card.event-week{background:white;color:var(--midnight)}.collapse-btn{display:none}.collapsible.closed{max-height:none!important}.section{break-inside:avoid}.faq-a{display:block}.faq-arrow{display:none}}
+</style>
+</head>
+<body>
+
+<div id="authGate">
+  <div class="gate-box">
+    <div class="gate-glow"></div>
+    <div class="gate-logo">IFS Copperleaf &mdash; internal access</div>
+    <div class="gate-title">Sales enablement hub</div>
+    <div class="gate-sub">Enter the access password to continue.</div>
+    <input class="gate-input" type="password" id="gatePassword" placeholder="Access password" autocomplete="off"/>
+    <button class="gate-btn" id="gateSubmitBtn" type="button">Enter</button>
+    <div class="gate-error" id="gateError"></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-left">
+        <div class="hero-eyebrow">IFS Copperleaf &mdash; sales enablement hub</div>
+        <h1 class="hero-title">Copperleaf at Unleashed 2026</h1>
+        <p class="hero-sub">Orlando World Center Marriott &middot; 12&ndash;16 October 2026</p>
+        <div class="hero-date" id="heroDate"></div>
+        <div class="week-indicator"><span class="week-dot"></span><span id="weekIndicator">Loading&hellip;</span></div>
+        <div class="this-week-card"><h3>This week</h3><div id="thisWeekContent"></div></div>
+      </div>
+      <div class="hero-right">
+        <div>
+          <div class="circle-cluster"><div class="circle-ring sm"></div><div class="circle-main"><span class="days-num" id="daysCount">&mdash;</span><span class="days-label">days</span></div><div class="circle-ring sm"></div></div>
+          <div class="countdown-label" style="margin-top:8px">Until Unleashed</div>
+        </div>
+        <div class="quota-mini">
+          <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+            <defs><linearGradient id="qGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8427E2"/><stop offset="100%" stop-color="#72C9F8"/></linearGradient></defs>
+            <circle cx="36" cy="36" r="30" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="5"/>
+            <circle id="quotaArc" cx="36" cy="36" r="30" fill="none" stroke="url(#qGrad)" stroke-width="5" stroke-dasharray="188.5" stroke-dashoffset="188.5" stroke-linecap="round" transform="rotate(-90 36 36)" style="transition:stroke-dashoffset .5s ease"/>
+          </svg>
+          <div class="quota-mini-label">Your quota</div>
+          <div class="quota-mini-val" id="quotaMiniVal">Set below</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="sticky-nav">
+  <div class="sticky-nav-inner">
+    <button class="nav-btn active" type="button" onclick="scrollToSection('playbook',this)">Week-by-week</button>
+    <button class="nav-btn" type="button" onclick="scrollToSection('offer',this)">Offer cheat sheet</button>
+    <button class="nav-btn" type="button" onclick="scrollToSection('assets',this)">Asset library</button>
+    <button class="nav-btn" type="button" onclick="scrollToSection('quota',this)">Quota tracker</button>
+    <button class="nav-btn" type="button" onclick="scrollToSection('talktracks',this)">Talk tracks</button>
+    <button class="nav-btn" type="button" onclick="scrollToSection('faq',this)">FAQ</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<section class="section" id="playbook">
+  <div class="section-header"><h2 class="section-title">Week-by-week <em>playbook</em></h2><button class="collapse-btn" type="button" onclick="toggleCollapse('playbookContent',this)">Collapse</button></div>
+  <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:10px 16px;margin-bottom:20px;font-size:12px;color:#92600a;">Marketing email messaging shown below is draft campaign guidance and may change before final deployment.</div>
+  <div class="collapsible" id="playbookContent" style="max-height:9999px"><div class="week-timeline" id="weekTimeline"></div></div>
+</section>
+
+<section class="section" id="offer">
+  <div class="section-header"><h2 class="section-title">Offer <em>cheat sheet</em></h2><button class="collapse-btn" type="button" onclick="toggleCollapse('offerContent',this)">Collapse</button></div>
+  <div class="collapsible" id="offerContent" style="max-height:9999px">
+    <table class="offer-table"><thead><tr><th>Registration type</th><th>Price</th><th>Notes</th></tr></thead><tbody>
+      <tr><td>Customer / Prospect &mdash; individual</td><td style="font-weight:600">$1,999</td><td>Includes M&amp;E, excludes Softeon. Training can be added. Eligible for Deal Inclusion at list price.</td></tr>
+      <tr><td>Customer / Prospect &mdash; 4-for-3 bundle</td><td style="font-weight:600">$5,997 ($1,499 each)</td><td>Best value play. Training not included in bundle. Eligible for Deal Inclusion.</td></tr>
+      <tr><td>Customer &mdash; Exec Track</td><td style="font-weight:600">$1,999</td><td>Invite-only, separate link.</td></tr>
+      <tr><td>Softeon customer</td><td style="font-weight:600">$0</td><td>Discount code or domain submission. 4-for-3 not applicable. Training adds $999.</td></tr>
+      <tr><td>Press / Industry Analyst</td><td style="font-weight:600">$0 + travel &amp; accommodation</td><td>Private link. 3 nights accommodation included.</td></tr>
+      <tr><td>Sponsor</td><td style="font-weight:600">Included</td><td>Register via sponsor portal.</td></tr>
+    </tbody></table>
+    <div class="stat-callout"><div class="stat-num">$1,499<span style="font-size:18px">/seat</span></div><div class="stat-sub">Save $500/seat vs individual</div><div class="stat-note">On the 4-for-3 bundle &mdash; three registrations plus one free.</div></div>
+    <p style="font-size:14px;color:var(--dark-grey);margin-bottom:16px"><strong>Deal Inclusion:</strong> Individual and 4-for-3 bundle are both eligible at list price. Bring this up early to reduce budget friction.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <a class="pill-btn" href="https://unleashed.ifs.com/" target="_blank" rel="noopener noreferrer">Register now</a>
+      <a class="pill-btn ghost" href="https://eur.cvent.me/RqeReR" target="_blank" rel="noopener noreferrer">Direct registration form</a>
+      <button class="pill-btn ghost" type="button" onclick="copyText('https://unleashed.ifs.com/',this)">Copy URL</button>
+    </div>
+    <p style="font-size:12px;color:var(--grey2);margin-top:12px">Note: The direct registration form uses Cvent, the event registration platform used for IFS Unleashed. Both links go to the same event; the Cvent link opens the registration form directly.</p>
+  </div>
+</section>
+
+<section class="section" id="assets">
+  <div class="section-header"><h2 class="section-title">Asset <em>library</em></h2><button class="collapse-btn" type="button" onclick="toggleCollapse('assetsContent',this)">Collapse</button></div>
+  <div class="collapsible" id="assetsContent" style="max-height:9999px">
+    <div class="asset-cols">
+      <div>
+        <div class="asset-col-head ready">Ready now</div>
+        <div class="asset-item"><span class="asset-name">1:1 4-for-3 email template</span><button class="asset-action" type="button" onclick="copyText(window.assetCopy.bundle,this)">Copy</button></div>
+        <div class="asset-item"><span class="asset-name">1:1 Deal Inclusion email template</span><button class="asset-action" type="button" onclick="copyText(window.assetCopy.deal,this)">Copy</button></div>
+        <div class="asset-item"><span class="asset-name">Marketing email copy (per wave)</span><span class="asset-status">Ask marketing for latest draft</span></div>
+        <div class="asset-item"><span class="asset-name">SharePoint &mdash; 2026 campaign site</span><a class="asset-action" href="https://ifs.sharepoint.com/:u:/r/sites/Events/SitePages/Unleashed-2026.aspx?csf=1&web=1&e=rC4GOX" target="_blank" rel="noopener noreferrer">Open</a></div>
+        <div class="asset-item"><span class="asset-name">Reasons to Attend PDF</span><a class="asset-action" href="https://ifs.sharepoint.com/:b:/r/sites/CPLF_-marketing/Events/2026%20Events/IFS%20Unleashed%202026/Emails/General_Reasons%20to%20Attend_Unleashed%2026.pdf.pdf?csf=1&web=1&e=9VBttk" target="_blank" rel="noopener noreferrer">Open</a></div>
+      </div>
+      <div>
+        <div class="asset-col-head coming">Coming soon</div>
+        <div class="asset-item"><span class="asset-name">LinkedIn banners (4 versions)</span><a class="asset-action" href="https://ifs.sharepoint.com/:f:/r/sites/GlobalMarketingTeam/Shared%20Documents/General/Central%20Marketing/Corporate%20Marketing%20-%20Events/2026/Unleashed%202026/Promo%20%26%20Comms/Sales%20Toolkit/LinkedIn%20Backgrounds?csf=1&web=1&e=T3kICs" target="_blank" rel="noopener noreferrer">Open</a></div>
+        <div class="asset-item"><span class="asset-name">Email signature banners (2 versions)</span><a class="asset-action" href="https://ifs.sharepoint.com/:f:/r/sites/GlobalMarketingTeam/Shared%20Documents/General/Central%20Marketing/Corporate%20Marketing%20-%20Events/2026/Unleashed%202026/Promo%20%26%20Comms/Sales%20Toolkit/Email%20Banners?csf=1&web=1&e=zqg7mg" target="_blank" rel="noopener noreferrer">Open</a></div>
+        <div class="asset-item"><span class="asset-name">Teams backgrounds (2 versions)</span><a class="asset-action" href="https://ifs.sharepoint.com/:f:/r/sites/GlobalMarketingTeam/Shared%20Documents/General/Central%20Marketing/Corporate%20Marketing%20-%20Events/2026/Unleashed%202026/Promo%20%26%20Comms/Sales%20Toolkit/Teams%20Backgrounds?csf=1&web=1&e=LhpGZb" target="_blank" rel="noopener noreferrer">Open</a></div>
+        <div class="asset-item"><span class="asset-name">Social cards</span><a class="asset-action" href="https://ifs.sharepoint.com/:f:/r/sites/GlobalMarketingTeam/Shared%20Documents/General/Central%20Marketing/Corporate%20Marketing%20-%20Events/2026/Unleashed%202026/Promo%20%26%20Comms/Sales%20Toolkit/Social%20Cards?csf=1&web=1&e=I2d8yp" target="_blank" rel="noopener noreferrer">Open</a></div>
+      </div>
+      <div>
+        <div class="asset-col-head hold">On hold</div>
+        <div class="asset-item"><span class="asset-name">Agenda launch 1:1 email template</span><span class="asset-status">Not yet released</span></div>
+        <div class="asset-item"><span class="asset-name">PPT agenda deck</span><span class="asset-status">Not yet released</span></div>
+        <div class="asset-item"><span class="asset-name">2-page agenda PDF</span><span class="asset-status">Not yet released</span></div>
+        <div class="asset-item"><span class="asset-name">Agenda landing page URL</span><span class="asset-status">Not yet released</span></div>
+      </div>
+    </div>
+    <div style="margin-top:32px;border-top:1px solid var(--grey4);padding-top:28px;">
+      <div style="font-size:14px;font-weight:600;color:var(--midnight);margin-bottom:4px;">Champion enablement templates</div>
+      <p style="font-size:13px;color:var(--grey2);line-height:1.55;margin-bottom:16px;">Lightweight copy-ready templates for AEs to send to their internal Champion so the Champion can sell the value of attending upward or laterally. Use these while full Reasons to Attend assets are being finalised.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="border:1px solid var(--grey4);border-radius:10px;padding:18px 20px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;">Forward this to your boss</div>
+          <div style="font-size:13px;color:var(--grey2);margin-bottom:12px;">Send to your Champion to forward internally to their manager or budget holder.</div>
+          <button type="button" onclick="copyText(window.assetCopy.champion_boss,this)" style="background:var(--purple);color:var(--white);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:var(--font)">Copy template</button>
+        </div>
+        <div style="border:1px solid var(--grey4);border-radius:10px;padding:18px 20px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;">Share this with your team</div>
+          <div style="font-size:13px;color:var(--grey2);margin-bottom:12px;">Send to your Champion to share internally with their broader team or stakeholders.</div>
+          <button type="button" onclick="copyText(window.assetCopy.champion_team,this)" style="background:var(--purple);color:var(--white);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:var(--font)">Copy template</button>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:24px;background:rgba(132,39,226,.05);border:1px solid rgba(132,39,226,.15);border-radius:10px;padding:16px 20px;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;">Internal operations note &mdash; Outreach.io</div>
+      <p style="font-size:13px;color:var(--dark-grey);line-height:1.6;">The approved AE email cadences for this campaign should ideally be front-loaded into Outreach.io so reps can log in, select the Unleashed cadence, personalise it, and send directly &mdash; rather than manually copying templates. If your region uses Outreach.io and the cadence is not yet available, raise this with your campaign or sales operations contact. <span class="assumption">[ASSUMPTION: Outreach.io cadence availability may vary by region &mdash; confirm with your ops team.]</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quota">
+  <div class="section-header"><h2 class="section-title">Quota <em>tracker</em></h2><button class="collapse-btn" type="button" onclick="toggleCollapse('quotaContent',this)">Collapse</button></div>
+  <div class="collapsible" id="quotaContent" style="max-height:9999px">
+    <table class="quota-table"><thead><tr><th>Region</th><th>AE count</th><th>Target per AE</th><th>Regional target</th></tr></thead><tbody>
+      <tr><td>AMER</td><td>9 AEs</td><td>12 registrations</td><td>108</td></tr>
+      <tr><td>APJMEA</td><td>5 AEs</td><td>5 registrations</td><td>25</td></tr>
+      <tr><td>Europe</td><td>9 AEs + SVPs</td><td>5 registrations</td><td>45</td></tr>
+      <tr><td style="font-weight:600">Total</td><td></td><td></td><td style="font-weight:600">178 registrations</td></tr>
+    </tbody></table>
+    <div class="tracker-box">
+      <div class="tracker-row">
+        <div class="tracker-field"><label>Your region</label><select id="regionSelect" onchange="updateTracker()"><option value="AMER">AMER (target: 12)</option><option value="APJMEA">APJMEA (target: 5)</option><option value="Europe">Europe (target: 5)</option></select></div>
+        <div class="tracker-field"><label>Current registrations</label><input type="number" id="currentRegs" value="0" min="0" max="50" onchange="updateTracker()" oninput="updateTracker()"/></div>
+      </div>
+      <div>
+        <div class="progress-bar-label"><span id="progressLabel">0 of 12 registrations</span><span id="progressPct" style="color:var(--purple);font-weight:600">0%</span></div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+        <p class="pacing-note" id="pacingNote"></p>
+      </div>
+    </div>
+    <div style="margin-top:28px;">
+      <a href="https://app.powerbi.com/reportEmbed?reportId=a906665f-88be-4530-bee5-3aa34d9193a9&autoAuth=true&ctid=afadec18-0533-4cba-8578-5316252ff93f" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:var(--midnight);color:var(--white);border-radius:100px;padding:10px 22px;font-size:13px;font-weight:600;text-decoration:none;font-family:var(--font);">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="8" width="3" height="7" rx="1" fill="#CD92FF"/><rect x="6" y="5" width="3" height="10" rx="1" fill="#8427E2"/><rect x="11" y="2" width="3" height="13" rx="1" fill="#72C9F8"/></svg>
+        View live registration dashboard
+      </a>
+      <span style="font-size:12px;color:var(--grey2);margin-left:12px;">Opens in Power BI &mdash; sign in with your IFS credentials</span>
+    </div>
+    <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid var(--grey4);">
+      <iframe title="Unleashed'26 Registrations Report" width="100%" height="541" src="https://app.powerbi.com/reportEmbed?reportId=a906665f-88be-4530-bee5-3aa34d9193a9&autoAuth=true&ctid=afadec18-0533-4cba-8578-5316252ff93f" frameborder="0" allowfullscreen="true" style="display:block;"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="talktracks">
+  <div class="section-header"><h2 class="section-title">Talk track <em>library</em></h2><button class="collapse-btn" type="button" onclick="toggleCollapse('ttContent',this)">Collapse</button></div>
+  <div class="collapsible" id="ttContent" style="max-height:9999px"><div class="talk-track-list" id="talkTrackList"></div></div>
+</section>
+
+<section class="section" id="faq">
+  <div class="section-header"><h2 class="section-title">FAQ &amp; quick <em>reference</em></h2><button class="collapse-btn" type="button" onclick="toggleCollapse('faqContent',this)">Collapse</button></div>
+  <div class="collapsible" id="faqContent" style="max-height:9999px"><div class="faq-list" id="faqList"></div></div>
+</section>
+
+<div class="closing">
+  <h2>Copperleaf at Unleashed 2026</h2>
+  <p>Tuesday 13 + Wednesday 14 October &mdash; afternoon breakout, Orlando World Center Marriott</p>
+  <a class="pill-btn" href="https://unleashed.ifs.com/" target="_blank" rel="noopener noreferrer">Register at unleashed.ifs.com</a>
+</div>
+
+</main>
+
+<script>
+(function(){
+'use strict';
+
+/* ── PASSWORD GATE ── */
+var ACCESS_PASSWORD='Unleashed2026';
+function initGate(){
+  try{if(sessionStorage.getItem('ifs_gate')==='ok'){document.getElementById('authGate').style.display='none';return;}}catch(e){}
+  var btn=document.getElementById('gateSubmitBtn');
+  var inp=document.getElementById('gatePassword');
+  var err=document.getElementById('gateError');
+  function check(){
+    err.textContent='';
+    if(inp.value===ACCESS_PASSWORD){
+      try{sessionStorage.setItem('ifs_gate','ok');}catch(e){}
+      document.getElementById('authGate').style.display='none';
+    }else{
+      err.textContent='Incorrect password. Please try again.';
+      inp.value='';inp.focus();
+    }
+  }
+  btn.addEventListener('click',check);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){check();}});
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initGate);}else{initGate();}
+
+/* ── DATA ── */
+var EVENT_DATE=new Date('2026-10-12T00:00:00');
+var CAMPAIGN_START=new Date('2026-05-27T00:00:00');
+var TOTAL_WEEKS=21;
+
+window.assetCopy={
+  bundle:'Subject: Bring your team to IFS Unleashed\n\nHi [First Name],\n\nI wanted to personally reach out about IFS Unleashed 2026, our flagship event in Orlando, 12\u201316 October.\n\nWe have a 4-for-3 bundle: register three attendees and the fourth comes free. At $1,499 per seat, it reduces the per-head cost and gives your broader team room to attend.\n\nCopperleaf is running a dedicated breakout on Tuesday and Wednesday afternoon, designed for infrastructure leaders thinking about capital investment decisions.\n\nWould it make sense to set aside 15 minutes to walk through who from your team would benefit most?\n\n[Your name]',
+  deal:'Subject: Your Unleashed registration \u2014 Deal Inclusion available\n\nHi [First Name],\n\nI wanted to flag that IFS Unleashed 2026 is eligible for Deal Inclusion, which means the registration cost ($1,999 individual or $5,997 for the 4-for-3 bundle) can be incorporated directly into your active deal.\n\nThe Copperleaf breakout runs Tuesday and Wednesday afternoon, 13\u201314 October. It is built for infrastructure leaders focused on capital investment decisions.\n\nHappy to send the details and work through the Deal Inclusion process with you.\n\n[Your name]',
+  champion_boss:'Subject: Worth considering for our team \u2014 IFS Unleashed 2026\n\nHi [Manager name],\n\nI wanted to flag an event I think is worth our team attending this year.\n\nIFS Unleashed 2026 takes place in Orlando, 12\u201316 October. It is IFS\u2019s flagship global conference, and this year includes a dedicated Copperleaf breakout track on Tuesday and Wednesday afternoon specifically focused on capital investment decision-making, optimization, and long-term planning.\n\nThe session is designed for infrastructure and asset-intensive organisations \u2014 covering how teams are improving investment decisions using Industrial AI, balancing cost, risk, and performance, and building more defensible plans. Microsoft is also joining as a featured speaker partner.\n\nFrom a value perspective, there is a 4-for-3 bundle available: register three attendees and a fourth comes free, bringing the per-seat cost to $1,499. The registration is also eligible for Deal Inclusion, which can reduce the budget impact further.\n\nI think the combination of peer learning, Microsoft involvement, and the direct relevance to the decisions we are working through makes this worth the investment.\n\nHappy to discuss further.\n\n[Your name]',
+  champion_team:'Subject: IFS Unleashed 2026 \u2014 Copperleaf breakout worth attending\n\nHi team,\n\nI wanted to share details of an event taking place this October that I think is directly relevant to our work.\n\nIFS Unleashed 2026 is on 12\u201316 October in Orlando, Florida. It is IFS\u2019s global conference, and this year includes a dedicated Copperleaf breakout track on Tuesday 13 and Wednesday 14 October.\n\nThe sessions focus on:\n\u2022 How infrastructure and asset-intensive organisations are improving capital investment decisions\n\u2022 Balancing cost, risk, and performance in long-term planning\n\u2022 The role of optimization and Industrial AI in better investment outcomes\n\u2022 Real examples from peer organisations facing similar challenges\n\nMicrosoft is also joining as a featured speaker, which broadens the conversation beyond Copperleaf into the wider AI and planning landscape.\n\nFor those attending as a group, there is a 4-for-3 bundle: register three and a fourth place is included free. That brings the per-seat cost to $1,499.\n\nIf you think this is relevant to your role or your current projects, it is worth considering. Happy to send the registration link or answer questions.\n\n[Your name]'
+};
+
+var emails=[
+  {num:'01',date:'2026-05-27',subject:'Save the Date \u2014 IFS Unleashed 2026',theme:'Save the Date',audience:'Target accounts + customers/prospects',status:'Sent',folderUrl:'https://ifs.sharepoint.com/:f:/r/sites/CPLF_-marketing/Events/2026%20Events/IFS%20Unleashed%202026/Emails/Email%20%231%20Save%20the%20date?csf=1&web=1&e=7PxCRN'},
+  {num:'02',date:'2026-06-04',subject:'Reasons to Attend Unleashed 2026',theme:'Reasons to Attend',audience:'Not registered',status:'Sent',folderUrl:'https://ifs.sharepoint.com/:f:/r/sites/CPLF_-marketing/Events/2026%20Events/IFS%20Unleashed%202026/Emails/Email%20%232%20Reasons%20to%20Attend?csf=1&web=1&e=k3M7ug',pdfUrl:'https://ifs.sharepoint.com/:b:/r/sites/CPLF_-marketing/Events/2026%20Events/IFS%20Unleashed%202026/Emails/General_Reasons%20to%20Attend_Unleashed%2026.pdf.pdf?csf=1&web=1&e=1sqgKH'},
+  {num:'03',date:'2026-06-09',subject:'Standing Start to Front of the Grid \uD83C\uDFC1',theme:'Cadillac F1\u00AE speaker announcement',audience:'Not registered',status:'Planned'},
+  {num:'04',date:'2026-06-23',subject:'What you\u2019ll learn in 45 minutes',theme:'Agenda preview',audience:'Not registered',status:'Planned'},
+  {num:'05',date:'2026-07-07',subject:'Is this session relevant to you?',theme:'Persona targeting',audience:'Not registered',status:'Planned'},
+  {num:'06',date:'2026-07-21',subject:'How organizations are improving investment decisions',theme:'Use case / proof',audience:'Not registered',status:'Planned'},
+  {num:'07',date:'2026-08-04',subject:'Seats are filling for this Unleashed breakout',theme:'Urgency + social proof',audience:'Not registered',status:'Planned'},
+  {num:'08',date:'2026-08-14',subject:'Plan your day at Unleashed',theme:'Agenda + calendar',audience:'Not registered',status:'Planned'},
+  {num:'09',date:'2026-08-24',subject:'Final agenda and speakers announced',theme:'Full recap',audience:'Not registered',status:'Planned'},
+  {num:'10',date:'2026-09-17',subject:'Last chance to secure your spot',theme:'Strong urgency',audience:'Not registered',status:'Planned'},
+  {num:'11',date:'2026-09-29',subject:'Happening next week at Unleashed',theme:'Reminder',audience:'Not registered',status:'Planned'},
+  {num:'12',date:'2026-10-05',subject:'Final reminder: Copperleaf breakout',theme:'Last push + logistics',audience:'Not registered',status:'Planned'}
+];
+
+var salesWindows=['2026-06-09','2026-07-07','2026-08-04','2026-09-17'];
+
+var AE_ACTION_BY_EMAIL={
+  '01':'Follow up on the Save the Date. Confirm who from each account is planning to attend and begin the registration conversation.',
+  '02':'Use the Reasons to Attend email as a prompt to call. Walk prospects through the value of the Copperleaf sessions, including customer spotlights, Industrial AI, Asset Investment Planning, Foresight AI demos, and the full Unleashed experience.',
+  '03':'Use the Cadillac F1\u00AE announcement as a reason to re-engage priority accounts. Position it as a leadership and operations story: how elite teams build performance, make high-stakes decisions, and execute while still building the foundations.',
+  '04':'Reference the agenda preview in outreach. Share what the sessions will cover and why it is relevant to their role.'
+};
+
+var RECOMMENDED_ASSET_BY_EMAIL={
+  '01':'Email #01 folder \u2014 Save the Date copy',
+  '02':'Email #02 folder + PDF \u2014 Reasons to Attend copy',
+  '03':'Email #03 draft \u2014 Cadillac F1\u00AE speaker announcement copy + registration link',
+  '04':'Agenda preview \u2014 request from marketing'
+};
+
+var AE_ACTIONS=[
+  'Review campaign launch email and prepare your target account list for Unleashed outreach.',
+  'Follow up on the Save the Date. Confirm who from each account is planning to attend and begin the registration conversation.',
+  'Use the Reasons to Attend email as a prompt to call. Walk prospects through the value of the Copperleaf sessions.',
+  'Use the Cadillac F1\u00AE announcement as a reason to re-engage priority accounts.',
+  'Reference the agenda preview in outreach. Share what the sessions will cover.',
+  'Run a persona check: which contacts fit the infrastructure leader profile? Prioritise those calls.',
+  'Use the proof email as a reason to call. Reference a specific example relevant to their sector.',
+  'Create urgency. Reference the social proof email in your message.',
+  'Focus on logistics and planning. Help contacts understand when the sessions run.',
+  'Priority sales window. Call every top account on your list.',
+  'Last-chance outreach. Offer to handle registration logistics directly.',
+  'Confirm attendance for all registered contacts. Share final logistics and schedule.',
+  'Final day push. Send personal notes to unregistered priority contacts.',
+  'Travel day for many attendees. Ensure registered contacts have breakout times confirmed.',
+  'Attend Copperleaf breakout #1. Introduce contacts to the team.',
+  'Attend Copperleaf breakout #2. Capture feedback and next steps.',
+  'Capture on-site conversations and set follow-up meetings before the event closes.',
+  'Begin post-event follow-up while the sessions are fresh.',
+  'Update CRM with Unleashed contacts and outcomes.',
+  'Send personalised follow-up emails to every breakout attendee.',
+  'Convert Unleashed conversations into qualified pipeline.'
+];
+
+var RECOMMENDED_ASSETS=[
+  '1:1 Deal Inclusion or 4-for-3 email template',
+  'Email #01 folder \u2014 Save the Date copy',
+  'Email #02 folder + PDF \u2014 Reasons to Attend copy',
+  'Email #03 draft \u2014 Cadillac F1\u00AE speaker announcement copy + registration link',
+  'Agenda preview \u2014 request from marketing',
+  'Persona-targeted messaging','Use case proof points','Social proof urgency framing',
+  'Agenda + calendar invite template','Final agenda PDF','Last-chance email template',
+  'Registration link + logistics brief','Final logistics note','Registration confirmation',
+  'Breakout session slide deck','Breakout session slide deck','On-site meeting notes template',
+  'Post-event follow-up template','CRM update checklist','Post-event follow-up template','Deal conversion checklist'
+];
+
+var talkTracks=[
+  {label:'Cold opener \u2014 no prior email',subject:'For prospects who have not received any campaign emails',body:'"Hi [Name], I am calling because I wanted to reach out personally ahead of IFS Unleashed in October. Copperleaf is running a dedicated breakout track inside the main event \u2014 two afternoon sessions specifically built for infrastructure leaders making capital investment decisions. Given what your team is working through right now, I thought it was worth a quick conversation about whether this would be worth your time. Do you have five minutes?"'},
+  {label:'Email 01 \u2014 Save the Date',subject:'Following the Save the Date email',body:'"Hi [Name], I know you just received our Save the Date for IFS Unleashed in October. I wanted to follow up personally \u2014 the Copperleaf breakout is two dedicated afternoon sessions on Tuesday and Wednesday, built specifically for infrastructure leaders making capital investment decisions. Registration and the main stage agenda are already live. Are you already planning to be at Unleashed?"'},
+  {label:'Email 02 \u2014 Reasons to Attend',subject:'Following the Reasons to Attend email',body:'"Hi [Name], we just sent over the reasons we think Unleashed is worth your time this year. The Copperleaf sessions specifically are designed for the decisions your team is accountable for \u2014 capital planning, investment prioritisation, balancing cost and risk. We have got customer spotlights including PG\u0026E, Foresight AI demos, and Microsoft, Siemens, PwC and Deloitte all involved. Would it be useful to walk through what the sessions cover before you decide whether to register?"'},
+  {label:'Email 03 \u2014 Cadillac F1\u00AE speaker announcement',subject:'Following the Cadillac Formula 1\u00AE Team speaker announcement',body:'"Hi [Name], we just announced one of the headline conversations at IFS Unleashed: Graeme Lowdon and Checo P\u00E9rez from Cadillac Formula 1\u00AE Team. The session is about what it takes to build a winning operation from scratch \u2014 the mindset, decisions, and execution discipline required when everything is still being built. I thought it would be especially relevant given the transformation and investment decisions your team is navigating. Are you already planning to attend?"'},
+  {label:'Email 04 \u2014 Agenda preview',subject:'Following the agenda preview email',body:'"Hi [Name], we just shared a preview of what the Copperleaf sessions will cover. The format is deliberately tight \u2014 everything in it is designed for people making capital investment decisions, not a general audience. I think it is worth your time. Have you had a chance to look at it?"'},
+  {label:'Email 05 \u2014 Persona targeting',subject:'Following the persona relevance email',body:'"Hi [Name], I know we sent an email asking whether this session is relevant to you. For someone in your position, the breakout is specifically structured around the decisions you are accountable for: where capital goes, how risk is balanced, and how you justify the plan. Does that make sense?"'},
+  {label:'Email 06 \u2014 Use case / proof',subject:'Following the use case email',body:'"Hi [Name], we just shared examples of how organisations are changing the way they make investment decisions. One of those examples is directly comparable to your situation, and I think it would land better in a conversation than in an email. Do you have three minutes?"'},
+  {label:'Email 07 \u2014 Urgency',subject:'Following the seats are filling email',body:'"Hi [Name], I am calling because I want to make sure you do not get closed out. We are approaching the point where breakout capacity will be set, and I would rather have this conversation now than after. If the date works, let us get you registered today. What is the best way to handle the logistics on your end?"'},
+  {label:'Email 08 \u2014 Agenda + calendar',subject:'Following the plan your day email',body:'"Hi [Name], we just sent over agenda and logistics details for Unleashed. The Copperleaf sessions are both in the afternoon \u2014 Tuesday and Wednesday \u2014 which means you can do the main hall keynotes in the morning and still make it. Are you registered yet?"'},
+  {label:'Email 09 \u2014 Final agenda',subject:'Following the full agenda announcement',body:'"Hi [Name], the full agenda and speaker lineup just went out. This is the last natural touchpoint before the event \u2014 everything is confirmed, and I want to make sure you are on the list. If there is any friction with registration or budget, now is the time to sort it. What is your current situation?"'},
+  {label:'Email 10 \u2014 Last chance',subject:'Following the last chance email',body:'"Hi [Name], I know this is the last time I will be in touch before Unleashed. The Copperleaf breakout on Tuesday and Wednesday afternoon is worth your time. If there is anything I can do to make this easier \u2014 Deal Inclusion, a 4-for-3 bundle, or getting the paperwork done \u2014 I am available right now. What would help?"'},
+  {label:'Email 11 \u2014 Happening next week',subject:'Following the next week reminder',body:'"Hi [Name], Unleashed is next week and the Copperleaf breakout is Tuesday and Wednesday afternoon. If you are attending the main conference and have not registered for the breakout specifically, let us fix that now. Want me to send you the direct link?"'},
+  {label:'Email 12 \u2014 Final reminder',subject:'Following the final logistics reminder',body:'"Hi [Name], this is the last one. We are two days out. The Copperleaf sessions are Tuesday afternoon and Wednesday afternoon \u2014 Orlando World Center Marriott, main breakout track. If you are going to be there, I want to see you in the room. Is there anything in the way of that happening?"'},
+  {label:'Objection handler \u2014 travel cost',subject:'We are not sure we can justify travel to Orlando',body:'"I hear that. The 4-for-3 bundle brings the per-seat cost down to $1,499 \u2014 so if you bring a team of four, three registrations cover all four seats. That changes the per-head justification. The registration is also Deal Inclusion eligible, which means it can come out of the deal budget rather than a separate travel line. The Copperleaf breakout specifically is not a generic conference \u2014 it is two afternoons directly relevant to the decisions your team is accountable for. Would it help if I modelled the numbers for you?"'}
+];
+
+var faqs=[
+  {q:'What is the Copperleaf breakout about?',a:'The Copperleaf breakout at IFS Unleashed 2026 focuses on how infrastructure and asset-intensive organizations are improving capital investment decisions through optimization, Industrial AI, and better long-term planning.<br><br>Attendees will learn how organizations are balancing cost, risk, and performance while building more defensible and transparent investment plans.'},
+  {q:'When does the breakout actually happen?',a:'The Copperleaf breakout sessions take place during the afternoon breakout tracks on:<br><br><ul><li><strong>Tuesday, 13 October 2026</strong></li><li><strong>Wednesday, 14 October 2026</strong></li></ul><br>Both sessions are part of the main IFS Unleashed breakout program.'},
+  {q:'Where is the event?',a:'IFS Unleashed 2026 takes place at:<br><br><strong>Orlando World Center Marriott</strong><br>Orlando, Florida<br>12\u201316 October 2026'},
+  {q:'What is the registration link?',a:'<strong>Main event website:</strong><br><a href="https://unleashed.ifs.com/" target="_blank" rel="noopener noreferrer" style="color:var(--purple)">https://unleashed.ifs.com/</a><br><br><strong>Direct registration link:</strong><br><a href="https://eur.cvent.me/RqeReR" target="_blank" rel="noopener noreferrer" style="color:var(--purple)">https://eur.cvent.me/RqeReR</a>'},
+  {q:'What does the event cost and how does the 4-for-3 bundle work?',a:'Individual customer and prospect registration is <strong>$1,999 per attendee</strong>.<br><br>The 4-for-3 team bundle allows organizations to register four attendees for <strong>$5,997 total</strong> \u2014 effectively <strong>$1,499 per seat</strong>.<br><br>Training is not included in the 4-for-3 package and can be added separately.<br><br>Both standard registrations and the 4-for-3 offer are eligible for Deal Inclusion.'},
+  {q:'What is the overall registration target?',a:'The overall global registration target for the Copperleaf breakout campaign is <strong>178 registrations</strong>.<br><br>Regional targets are:<br><ul><li><strong>AMER:</strong> 108</li><li><strong>APJMEA:</strong> 25</li><li><strong>Europe:</strong> 45</li></ul>'},
+  {q:'Who is speaking at the Copperleaf breakout?',a:'Microsoft is the featured strategic speaker partner for the Copperleaf breakout track.<br><br>Additional customer and industry speakers will be announced as the campaign progresses.'},
+  {q:'What are the four priority sales touch windows?',a:'The four designated AE outreach windows are:<br><br><ul><li><strong>Week of 9 June 2026</strong></li><li><strong>Week of 7 July 2026</strong></li><li><strong>Week of 4 August 2026</strong></li><li><strong>Week of 17 September 2026</strong></li></ul><br>These weeks align directly with key marketing campaign waves and are intended to drive coordinated AE outreach.'},
+  {q:'Who is the escalation contact for registration issues?',a:'<span class="assumption">[ASSUMPTION]</span> Registration escalation support is managed by the Unleashed event operations team or the Copperleaf marketing lead.<br><br>If a customer encounters registration or ticketing issues, coordinate internally with the campaign owner or event operations contact.'}
+];
+
+/* ── UTILITIES ── */
+function parseDate(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
+function getWeekStart(d){var day=d.getDay();var diff=d.getDate()-day+(day===0?-6:1);var w=new Date(d);w.setDate(diff);w.setHours(0,0,0,0);return w;}
+function addDays(d,n){var r=new Date(d);r.setDate(r.getDate()+n);return r;}
+function formatDate(d){var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return d.getDate()+' '+m[d.getMonth()];}
+
+/* ── PLAYBOOK ── */
+function buildWeeks(){
+  var weeks=[];
+  for(var i=0;i<TOTAL_WEEKS;i++){
+    var ws=addDays(CAMPAIGN_START,i*7);var we=addDays(ws,6);var wsc=getWeekStart(ws);
+    var ewk=emails.filter(function(e){return getWeekStart(parseDate(e.date)).getTime()===wsc.getTime();});
+    var isSW=salesWindows.some(function(sw){return getWeekStart(parseDate(sw)).getTime()===wsc.getTime();});
+    var isEv=ws<parseDate('2026-10-17')&&we>=parseDate('2026-10-12');
+    weeks.push({start:ws,end:we,emailsThisWeek:ewk,isSalesWindow:isSW,isEvent:isEv,idx:i+1});
+  }
+  return weeks;
+}
+
+function buildPlaybook(){
+  var weeks=buildWeeks();var today=new Date();today.setHours(0,0,0,0);var html='';
+  weeks.forEach(function(w,idx){
+    var isPast=w.end<today;var isCurrent=w.start<=today&&w.end>=today;
+    var cls='week-card'+(w.isSalesWindow?' sales-window':'')+(w.isEvent?' event-week':'')+(isPast&&!isCurrent?' past':'');
+    var primaryEmail=w.emailsThisWeek.length?w.emailsThisWeek[w.emailsThisWeek.length-1]:null;
+    var eHtml='<span style="font-style:italic;color:var(--grey2);font-size:13px">No marketing send this week</span>';
+    if(w.emailsThisWeek.length){
+      eHtml=w.emailsThisWeek.map(function(e){
+        var links='';
+        if(e.folderUrl){links+='<a href="'+e.folderUrl+'" target="_blank" rel="noopener noreferrer" style="color:var(--purple);font-size:12px;font-weight:600;text-decoration:none;margin-right:10px;">Open folder</a>';}
+        if(e.pdfUrl){links+='<a href="'+e.pdfUrl+'" target="_blank" rel="noopener noreferrer" style="color:var(--purple);font-size:12px;font-weight:600;text-decoration:none;margin-right:10px;">Open PDF</a>';}
+        return '<div style="font-size:13px;color:var(--dark-grey);margin-bottom:8px"><strong>Email #'+e.num+':</strong> '+e.subject+'<br><span style="color:var(--grey2);font-size:12px">'+e.audience+(e.status?' \u00b7 '+e.status:'')+'</span>'+(links?'<br>'+links:'')+'</div>';
+      }).join('');
+    }
+    var ae=(primaryEmail&&AE_ACTION_BY_EMAIL[primaryEmail.num])?AE_ACTION_BY_EMAIL[primaryEmail.num]:(AE_ACTIONS[idx]||'Review your registration pipeline and follow up with priority accounts.');
+    var ast=(primaryEmail&&RECOMMENDED_ASSET_BY_EMAIL[primaryEmail.num])?RECOMMENDED_ASSET_BY_EMAIL[primaryEmail.num]:(RECOMMENDED_ASSETS[idx]||'Campaign materials \u2014 request from marketing.');
+    var ttHtml='';
+    if(primaryEmail){var en=parseInt(primaryEmail.num,10);var tt=talkTracks[en];if(tt){ttHtml='<div class="wc-talk-track"><div class="wc-section-label">Talk track</div><div class="wc-body">'+tt.body+'</div></div>';}}
+    var badges='';
+    if(isCurrent){badges+='<span class="wc-tag current">Current week</span>';}
+    if(w.isSalesWindow){badges+='<span class="wc-tag sales">Priority sales window</span>';}
+    if(w.isEvent){badges+='<span class="wc-tag event">Event week</span>';}
+    html+='<div class="'+cls+'" id="week-'+w.idx+'">';
+    html+='<div class="wc-header"><div class="wc-left"><div class="wc-meta">Week '+w.idx+' of '+TOTAL_WEEKS+' \u00b7 '+formatDate(w.start)+' \u2013 '+formatDate(w.end)+'</div>';
+    html+='<div class="wc-title">'+(primaryEmail?primaryEmail.theme:w.isEvent?'Unleashed event week':'No marketing send')+'</div></div>';
+    if(badges){html+='<div class="wc-badges">'+badges+'</div>';}
+    html+='</div>';
+    if(!w.isEvent){
+      html+='<div class="wc-grid"><div><div class="wc-section-label">Marketing this week</div><div class="wc-body">'+eHtml+'</div></div>';
+      html+='<div><div class="wc-section-label">AE sales motion</div><div class="wc-body">'+ae+'</div></div>';
+      html+='<div><div class="wc-section-label">Recommended asset</div><div class="wc-body">'+ast+'</div></div></div>'+ttHtml;
+    }else{
+      html+='<div><div class="wc-section-label">Event schedule</div><div class="wc-body"><ul>';
+      html+='<li>Mon 12 Oct \u2014 Training Day Part 1, Partner Summit, Welcome Reception</li>';
+      html+='<li><strong>Tue 13 Oct \u2014 Copperleaf breakout #1, afternoon</strong></li>';
+      html+='<li><strong>Wed 14 Oct \u2014 Copperleaf breakout #2, afternoon</strong></li>';
+      html+='<li>Thu 15 Oct \u2014 Main Hall Day 3, Women in Tech Breakfast</li>';
+      html+='<li>Fri 16 Oct \u2014 Training Day Part 2, Foundation Fun Run/Walk</li>';
+      html+='</ul></div></div><div style="margin-top:12px"><div class="wc-section-label">AE sales motion</div><div class="wc-body">'+ae+'</div></div>';
+    }
+    html+='</div>';
+  });
+  document.getElementById('weekTimeline').innerHTML=html;
+
+  var thisWeek=weeks.find(function(w){return w.start<=today&&w.end>=today;});
+  if(thisWeek){
+    var primaryThisWeekEmail=thisWeek.emailsThisWeek.length?thisWeek.emailsThisWeek[thisWeek.emailsThisWeek.length-1]:null;
+    document.getElementById('weekIndicator').textContent='Week '+thisWeek.idx+' of '+TOTAL_WEEKS+' \u2014 '+(primaryThisWeekEmail?primaryThisWeekEmail.theme:thisWeek.isEvent?'Event week':'No marketing send');
+    var twc='';
+    twc+=primaryThisWeekEmail?'<div class="this-week-row"><div class="this-week-label">Email</div><div class="this-week-val">#'+primaryThisWeekEmail.num+' \u2014 '+primaryThisWeekEmail.subject+'</div></div>':'<div class="this-week-row"><div class="this-week-label">Email</div><div class="this-week-val" style="color:var(--grey2)">No marketing send this week</div></div>';
+    var heroAE=(primaryThisWeekEmail&&AE_ACTION_BY_EMAIL[primaryThisWeekEmail.num])?AE_ACTION_BY_EMAIL[primaryThisWeekEmail.num]:(AE_ACTIONS[thisWeek.idx-1]||'');
+    twc+='<div class="this-week-row"><div class="this-week-label">AE motion</div><div class="this-week-val">'+heroAE+'</div></div>';
+    if(thisWeek.isSalesWindow){twc+='<div class="this-week-row"><div class="this-week-label">Flag</div><div class="this-week-val" style="color:var(--purple);font-weight:500">Priority sales window \u2014 top account calls this week</div></div>';}
+    document.getElementById('thisWeekContent').innerHTML=twc;
+  }else if(today>parseDate('2026-10-16')){
+    document.getElementById('weekIndicator').textContent='Campaign complete \u2014 post-event follow-up phase';
+    document.getElementById('thisWeekContent').innerHTML='<div class="this-week-row"><div class="this-week-label">Status</div><div class="this-week-val">Unleashed has concluded. Focus on post-event pipeline conversion.</div></div>';
+  }else{
+    document.getElementById('weekIndicator').textContent='Pre-campaign planning';
+    document.getElementById('thisWeekContent').innerHTML='<div class="this-week-row"><div class="this-week-label">Status</div><div class="this-week-val">Campaign starts 27 May 2026. Prepare target account lists and outreach assets.</div></div>';
+  }
+}
+
+/* ── TALK TRACKS ── */
+function buildTalkTracks(){
+  var intro='<div style="background:rgba(132,39,226,.05);border:1px solid rgba(132,39,226,.15);border-radius:10px;padding:16px 20px;margin-bottom:20px;"><div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;">How to use these talk tracks</div><p style="font-size:13px;color:var(--dark-grey);line-height:1.6;">These are <strong>AE-to-prospect follow-up scripts</strong> \u2014 not marketing messages. Marketing is running a campaign to your prospects throughout this period. Your job is to call or message <em>alongside</em> those sends, not to repeat them verbatim. Each talk track references the theme of the email the prospect most recently received so your outreach feels coordinated and adds a personal layer on top of what marketing already said.</p></div>';
+  document.getElementById('talkTrackList').innerHTML=intro+talkTracks.map(function(tt){
+    return '<div class="tt-card'+(tt.label.indexOf('Objection')!==-1||tt.label.indexOf('Cold')!==-1?' special':'')+'"><div class="tt-label">'+tt.label+'</div><div class="tt-subject">'+tt.subject+'</div><div class="tt-body">'+tt.body+'</div></div>';
+  }).join('');
+}
+
+/* ── FAQ ── */
+function buildFAQ(){
+  var list=document.getElementById('faqList');
+  list.innerHTML=faqs.map(function(f){
+    return '<div class="faq-item"><button class="faq-q" type="button">'+f.q+'<span class="faq-arrow">\u2304</span></button><div class="faq-a">'+f.a+'</div></div>';
+  }).join('');
+  list.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var ans=this.nextElementSibling;var isOpen=ans.classList.contains('open');
+      list.querySelectorAll('.faq-q').forEach(function(b){b.classList.remove('open');});
+      list.querySelectorAll('.faq-a').forEach(function(a){a.classList.remove('open');});
+      if(!isOpen){this.classList.add('open');ans.classList.add('open');}
+    });
+  });
+}
+
+/* ── COUNTDOWN ── */
+function updateCountdown(){
+  var today=new Date();today.setHours(0,0,0,0);
+  var diff=Math.ceil((EVENT_DATE-today)/(1000*60*60*24));
+  document.getElementById('daysCount').textContent=diff>0?diff:(diff===0?'Today':'0');
+  var mo=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var dy=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  document.getElementById('heroDate').textContent=dy[today.getDay()]+', '+today.getDate()+' '+mo[today.getMonth()]+' '+today.getFullYear();
+}
+
+/* ── QUOTA ── */
+window.updateTracker=function(){
+  var region=document.getElementById('regionSelect').value;
+  var current=parseInt(document.getElementById('currentRegs').value,10)||0;
+  var target=region==='AMER'?12:5;
+  var pct=Math.min(100,Math.round((current/target)*100));
+  var today=new Date();today.setHours(0,0,0,0);
+  var totalDays=Math.ceil((EVENT_DATE-CAMPAIGN_START)/(1000*60*60*24));
+  var elapsed=Math.max(0,Math.ceil((today-CAMPAIGN_START)/(1000*60*60*24)));
+  var expPct=Math.min(100,Math.round((elapsed/totalDays)*100));
+  var expCnt=Math.round((expPct/100)*target);
+  var fill=document.getElementById('progressFill');
+  fill.style.width=pct+'%';fill.className='progress-bar-fill';
+  if(pct<expPct-10){fill.classList.add('behind');}else if(pct<expPct){fill.classList.add('warn');}
+  document.getElementById('progressLabel').textContent=current+' of '+target+' registrations';
+  document.getElementById('progressPct').textContent=pct+'%';
+  document.getElementById('progressPct').style.color=pct<expPct-10?'var(--fuchsia)':pct<expPct?'var(--lilac)':'var(--purple)';
+  var note='At this point in the campaign, you should be tracking toward approximately '+expCnt+' registrations ('+expPct+'% of target). ';
+  if(current>=target){note='Target reached. Consider identifying stretch accounts.';}
+  else if(pct>=expPct){note+=current+' vs '+expCnt+' expected \u2014 on track.';}
+  else if(pct>=expPct-10){note+=current+' vs '+expCnt+' expected \u2014 slightly behind. Prioritise top accounts this week.';}
+  else{note+=current+' vs '+expCnt+' expected \u2014 behind pace. Activate your sales window outreach now.';}
+  document.getElementById('pacingNote').innerHTML='<strong>Pacing:</strong> '+note;
+  var offset=188.5-(188.5*(pct/100));
+  document.getElementById('quotaArc').setAttribute('stroke-dashoffset',offset);
+  document.getElementById('quotaArc').setAttribute('stroke',pct<expPct-10?'#E00072':pct<expPct?'#CD92FF':'url(#qGrad)');
+  document.getElementById('quotaMiniVal').textContent=current+'/'+target;
+};
+
+/* ── SHARED UTILS ── */
+window.toggleCollapse=function(id,btn){
+  var el=document.getElementById(id);var isOpen=!el.classList.contains('closed');
+  if(isOpen){el.style.maxHeight=el.scrollHeight+'px';requestAnimationFrame(function(){el.style.maxHeight='0px';el.classList.add('closed');});btn.textContent='Expand';}
+  else{el.classList.remove('closed');el.style.maxHeight=el.scrollHeight+'px';btn.textContent='Collapse';setTimeout(function(){el.style.maxHeight='9999px';},300);}
+};
+window.scrollToSection=function(id,btn){
+  var el=document.getElementById(id);
+  if(el){var top=el.getBoundingClientRect().top+window.scrollY-56;window.scrollTo({top:top,behavior:'smooth'});}
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn){btn.classList.add('active');}
+};
+window.copyText=function(text,btn){
+  function done(){var orig=btn.textContent;btn.textContent='Copied';btn.style.opacity='.7';setTimeout(function(){btn.textContent=orig;btn.style.opacity='';},1500);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(fb);}else{fb();}
+  function fb(){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);done();}
+};
+
+/* ── INIT ── */
+function init(){updateCountdown();buildPlaybook();buildTalkTracks();buildFAQ();window.updateTracker();}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+
+}());
+</script>
+</body>
+</html>
